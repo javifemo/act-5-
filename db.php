@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "app1";
+$db = "ciberseguridad";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 

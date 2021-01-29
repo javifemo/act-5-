@@ -27,28 +27,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($username_err) && empty($password_err)){
-      $sql = "SELECT * FROM login WHERE username='$user' AND password='$passwd'";
-
-      if($q = $conn->query($sql)){
-        if($q -> num_rows !== 0){
-          session_start();
-
-          $_SESSION["loggedin"] = true;
-          $_SESSION["id"] = $id;
-          $_SESSION["username"] = $user;
-
-          header("location: welcome.php");
-          exit;
-        }else{
-          echo "ERROR";
-        }
-      }else{
-        echo "ERROR";
+      $sql = "INSERT INTO `login` (username, password) VALUES ('$user','$passwd')";
+            $q = $conn->query($sql);
+      mysqli_close($conn);
+    }else{
+      echo "ERROR";
     }
 
-    mysqli_close($conn);
-    }
-}
+  }
+
 
 
 ?>
@@ -57,16 +44,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <title> Basic SQL injection </title>
 </head>
 <body>
-  <form action="index.php" method="post">
+  <form action="Registro.php" method="post">
     <div>
       <label for="user"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="user" required>
+      <input type="text" placeholder="Enter username" name="user" required>
 
       <label for="passwd"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="passwd" required>
 
-      <button type="submit">Login</button>
-      <p>No tienes cuenta? <a href="Registro.php">Registrarse</a></p>
+      <button type="submit">Registrarse</button>
     </div>
 
     <div>
